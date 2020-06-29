@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block content %}
+<div class="row">
+      <div class="col-xs-3 col-md-3"></div>
+      <div class="col-xs-3 col-md-3 text-right">
+        <input name="choice" type="radio">翟子
+      </div>
+      <div class="col-xs-3 col-md-3">
+        <input name="choice" type="radio">晶晶
+      </div>
+      <div class="col-xs-3 col-md-3"></div>
+    </div>
+<div class="row">
+  <div class="col-xs-2 col-md-2"></div>
+  <div class="col-xs-8 col-md-8">
+    <div class="hello-form">
+        {{ render_form(form) }}
+    </div>
+  </div>
+  <div class="col-xs-2 col-md-2"></div>
+</div>
+<br><br><br>
+<div class="row">
+  <div class="col-xs-2 col-md-2"></div>
+  <div class="col-xs-8 col-md-8">
+    <h5>
+        {{messages|length}} messages
+         <small class="float-right">
+         <a href="#bottom" title="Go Bottom">&darr;</a>
+         </small>
+    </h5>
+  </div>
+  <div class="col-xs-2 col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-8 col-md-8">
+        <div class="list-group">
+            {% for message in messages %}
+            <a class="list-group-item list-group-item-action flex-column">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-success">
+                        {{ message.name }}
+                        <small class="text-muted">
+                            #{{ loop.revindex }}
+                            {{ moment(message.timestamp).fromNow(refresh=True) }}
+                        </small>
+                    </h5>
+                </div>
+                <p class="mb-1">
+                    {{ message.body }}
+                </p>
+            </a>
+            {% endfor %}}
+        </div>
+    </div>
+    <div class="col-xs-2 col-md-2"></div>
+</div>
+<div class="row"></div>
+
+{% endblock %}
